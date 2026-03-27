@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy – AlarmVolumeGuard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">🔔</div>
+        <span class="logo-text">AlarmVolumeGuard</span>
+      </div>
+      <span class="badge">Privacy Policy</span>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- Sidebar TOC -->
+    <aside class="toc" id="toc">
+      <p class="toc-title">On this page</p>
+      <nav>
+        <a href="#overview"        class="toc-link">Overview</a>
+        <a href="#information"     class="toc-link">Information We Collect</a>
+        <a href="#permissions"     class="toc-link">Permissions</a>
+        <a href="#purchases"       class="toc-link">In-App Purchases</a>
+        <a href="#third-party"     class="toc-link">Third-Party Services</a>
+        <a href="#data-retention"  class="toc-link">Data Retention</a>
+        <a href="#children"        class="toc-link">Children's Privacy</a>
+        <a href="#changes"         class="toc-link">Changes to This Policy</a>
+        <a href="#contact"         class="toc-link">Contact Us</a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+
+      <div class="hero">
+        <h1>Privacy Policy</h1>
+        <p class="effective">Effective date: <strong id="effective-date"></strong></p>
+        <p class="intro">
+          AlarmVolumeGuard is built on a simple principle: your device, your data.
+          This policy explains exactly what information the app uses, why it uses it,
+          and what it never does.
+        </p>
+      </div>
+
+      <section id="overview">
+        <h2><span class="section-num">01</span> Overview</h2>
+        <div class="highlight-box">
+          <p>
+            AlarmVolumeGuard does <strong>not collect, store, or transmit any personal
+            information</strong> to external servers. All data the app needs to function
+            is stored locally on your device and never leaves it.
+          </p>
+        </div>
+        <p>
+          The app's sole purpose is to monitor and maintain your Android alarm volume at
+          a level you choose, using a foreground service that runs in the background.
+          No accounts, no analytics, no tracking.
+        </p>
+      </section>
+
+      <section id="information">
+        <h2><span class="section-num">02</span> Information We Collect</h2>
+        <p>
+          AlarmVolumeGuard stores only the following data, <strong>locally on your device</strong>,
+          using Android SharedPreferences:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Purpose</th>
+              <th>Stored remotely?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Guard enabled/disabled state</td>
+              <td>Restore guard state after a reboot</td>
+              <td class="no">No</td>
+            </tr>
+            <tr>
+              <td>Guard volume level (integer)</td>
+              <td>Know which volume level to protect</td>
+              <td class="no">No</td>
+            </tr>
+            <tr>
+              <td>Subscription status (boolean)</td>
+              <td>Determine whether the guard feature is unlocked</td>
+              <td class="no">No</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          We do not collect your name, email address, location, device identifiers,
+          usage analytics, crash logs, or any other personal data.
+        </p>
+      </section>
+
+      <section id="permissions">
+        <h2><span class="section-num">03</span> Permissions</h2>
+        <p>
+          The app requests the following Android permissions. Each is used solely for the
+          stated purpose and nothing else.
+        </p>
+
+        <div class="permission-grid">
+          <div class="permission-card">
+            <div class="permission-icon">🔊</div>
+            <div>
+              <p class="permission-name">MODIFY_AUDIO_SETTINGS</p>
+              <p class="permission-desc">Allows the app to read and restore your alarm stream volume when it drops below your set level.</p>
+            </div>
+          </div>
+          <div class="permission-card">
+            <div class="permission-icon">🔕</div>
+            <div>
+              <p class="permission-name">ACCESS_NOTIFICATION_POLICY</p>
+              <p class="permission-desc">Required to ensure Do Not Disturb mode does not override alarm volume settings.</p>
+            </div>
+          </div>
+          <div class="permission-card">
+            <div class="permission-icon">🔔</div>
+            <div>
+              <p class="permission-name">POST_NOTIFICATIONS</p>
+              <p class="permission-desc">Displays a persistent notification (Android 13+) indicating the guard service is active. Required for foreground services.</p>
+            </div>
+          </div>
+          <div class="permission-card">
+            <div class="permission-icon">⚡</div>
+            <div>
+              <p class="permission-name">RECEIVE_BOOT_COMPLETED</p>
+              <p class="permission-desc">Automatically restarts the guard after a device reboot if you had previously enabled it.</p>
+            </div>
+          </div>
+          <div class="permission-card">
+            <div class="permission-icon">⚙️</div>
+            <div>
+              <p class="permission-name">FOREGROUND_SERVICE</p>
+              <p class="permission-desc">Runs a persistent background service to monitor alarm volume in real time using a system ContentObserver.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="purchases">
+        <h2><span class="section-num">04</span> In-App Purchases</h2>
+        <p>
+          AlarmVolumeGuard offers a Pro subscription (<code>guard_pro_monthly</code>) that
+          unlocks the Volume Guard feature. All purchase transactions are processed
+          entirely by <strong>Google Play Billing</strong>. We do not handle, store, or
+          have access to your payment information at any point.
+        </p>
+        <p>
+          The app only receives a confirmation of whether a valid active subscription exists.
+          No financial data is stored on your device or our servers.
+        </p>
+        <p>
+          To manage or cancel your subscription, visit
+          <strong>Google Play → Profile → Payments & subscriptions → Subscriptions</strong>.
+        </p>
+      </section>
+
+      <section id="third-party">
+        <h2><span class="section-num">05</span> Third-Party Services</h2>
+        <p>
+          The only third-party service integrated into AlarmVolumeGuard is
+          <strong>Google Play Billing</strong>, used exclusively to process subscription
+          payments. This service is governed by
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">
+            Google's Privacy Policy
+          </a>.
+        </p>
+        <p>
+          No analytics SDKs (such as Firebase, Crashlytics, or Amplitude), advertising
+          networks, or social media integrations are included in this app.
+        </p>
+      </section>
+
+      <section id="data-retention">
+        <h2><span class="section-num">06</span> Data Retention</h2>
+        <p>
+          All data (guard state, volume level, subscription cache) is stored locally on
+          your device inside Android's SharedPreferences. This data is automatically
+          deleted when you uninstall the app. You can also clear it at any time via
+          <strong>Settings → Apps → AlarmVolumeGuard → Clear Data</strong>.
+        </p>
+      </section>
+
+      <section id="children">
+        <h2><span class="section-num">07</span> Children's Privacy</h2>
+        <p>
+          AlarmVolumeGuard does not knowingly collect any personal information from
+          children under the age of 13. The app contains no user accounts, registration
+          flows, or data collection that would be relevant to this concern.
+        </p>
+      </section>
+
+      <section id="changes">
+        <h2><span class="section-num">08</span> Changes to This Policy</h2>
+        <p>
+          If this privacy policy is updated, the new version will be published at this
+          URL with a revised effective date. Continued use of the app after changes are
+          posted constitutes acceptance of the updated policy.
+        </p>
+      </section>
+
+      <section id="contact">
+        <h2><span class="section-num">09</span> Contact Us</h2>
+        <p>
+          If you have any questions or concerns about this privacy policy, please reach
+          out:
+        </p>
+        <div class="contact-card">
+          <p class="contact-app">AlarmVolumeGuard</p>
+          <p>
+            Email:
+            <a href="mailto:privacy@alarmvolumeguard.app">privacy@alarmvolumeguard.app</a>
+          </p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <footer>
+    <p>© <span id="footer-year"></span> AlarmVolumeGuard. All rights reserved.</p>
+    <p class="footer-sub">This app does not collect personal data.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
