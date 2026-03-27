@@ -1,63 +1,74 @@
 (() => {
-  // ── Effective date & footer year ──────────────────────────────────────────
+  // ── Config ─────────────────────────────────────────────────────────────────
   const EFFECTIVE_DATE = 'March 27, 2026';
 
+  // ── Date stamps ────────────────────────────────────────────────────────────
   document.getElementById('effective-date').textContent = EFFECTIVE_DATE;
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-  // ── Back-to-top button ────────────────────────────────────────────────────
-  const backToTop = document.getElementById('backToTop');
+  // ── Back-to-top ────────────────────────────────────────────────────────────
+  const btt = document.getElementById('btt');
 
   window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('visible', window.scrollY > 400);
+    btt.classList.toggle('visible', window.scrollY > 500);
   }, { passive: true });
 
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // ── Active TOC link on scroll ─────────────────────────────────────────────
-  const sections  = Array.from(document.querySelectorAll('section[id]'));
+  // ── Active TOC link ────────────────────────────────────────────────────────
+  const HEADER_H  = 72; // px — sticky header + breathing room
+  const cards     = Array.from(document.querySelectorAll('.card[id]'));
   const tocLinks  = Array.from(document.querySelectorAll('.toc-link'));
 
-  const HEADER_OFFSET = 90; // px — accounts for sticky header height
-
-  function setActiveLink() {
-    let current = '';
-
-    for (const section of sections) {
-      if (section.getBoundingClientRect().top <= HEADER_OFFSET) {
-        current = section.id;
-      }
+  function syncToc() {
+    let active = '';
+    for (const card of cards) {
+      if (card.getBoundingClientRect().top <= HEADER_H) active = card.id;
     }
-
-    tocLinks.forEach(link => {
-      const isActive = link.getAttribute('href') === `#${current}`;
-      link.classList.toggle('active', isActive);
-    });
+    tocLinks.forEach(l =>
+      l.classList.toggle('active', l.getAttribute('href') === `#${active}`)
+    );
   }
 
-  window.addEventListener('scroll', setActiveLink, { passive: true });
-  setActiveLink(); // run once on load
+  window.addEventListener('scroll', syncToc, { passive: true });
+  syncToc();
 
-  // ── Section reveal on scroll (IntersectionObserver) ───────────────────────
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // animate once
-        }
-      });
-    },
-    { threshold: 0.08 }
+  // ── Card reveal on scroll ──────────────────────────────────────────────────
+  const io = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.07, rootMargin: '0px 0px -40px 0px' }
   );
 
-  sections.forEach(section => observer.observe(section));
+  cards.forEach((card, i) => {
+    // Stagger delay so cards cascade in
+    card.style.transitionDelay = `${i * 40}ms`;
+    io.observe(card);
+  });
 
-  // Also reveal the hero immediately (not a <section>)
-  const hero = document.querySelector('.hero');
-  if (hero) {
-    hero.style.opacity = '1';
-  }
+  // ── Smooth TOC clicks with offset ─────────────────────────────────────────
+  tocLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      const id     = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.scrollY - HEADER_H;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+
+  // ── Hero CTA smooth scroll ─────────────────────────────────────────────────
+  document.querySelector('.hero-cta')?.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.getElementById('overview');
+    if (!target) return;
+    const y = target.getBoundingClientRect().top + window.scrollY - HEADER_H;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  });
+
 })();
